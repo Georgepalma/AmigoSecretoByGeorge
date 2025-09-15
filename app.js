@@ -1,9 +1,9 @@
-let participante = document.querySelector('input ');
+let participante = document.querySelector('input');
 let amigosParticipantes = [];
 let adicionarBtn = document.querySelector('#adicionar');
 let sortearBtn = document.querySelector('#sortear');
 let ExibirAmigoSorteado = document.querySelector('listaAmigos');
-
+let jaSorteado = false;
 function limparInput(){
     participante.value = '';
 }
@@ -35,8 +35,20 @@ function sortearAmigo(){
     console.log('Amigo sorteado: ' + amigoSorteado);
     exibirAmigoSorteado(amigoSorteado);
     let mudarBtn = document.querySelector('#botao-sortear');
-    mudarBtn.innerHTML = 'Sortear novamente';
-
+    mudarBtn.innerHTML = 'Refazer lista';
+    if(!jaSorteado){
+        jaSorteado = true;
+        return;
+    }
+    btnSortear.addEventListener('click', () => { 
+        if (amigosParticipantes.length > 0) {
+            amigosParticipantes = [];
+            exibirAmigoSorteado('Lista refeita! Adicione novos amigos.');
+            mudarBtn.innerHTML = 'Sortear amigo';
+            }
+        return;
+      }
+    
 };
 function exibirAmigoSorteado(amigoSorteado){
     let exibirAmigoSorteado = document.querySelector('h2');
